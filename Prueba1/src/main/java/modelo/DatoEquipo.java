@@ -1,23 +1,24 @@
 package modelo;
 
 import com.opencsv.bean.CsvBindAndJoinByPosition;
+import com.opencsv.bean.CsvBindByPosition;
 
 public class DatoEquipo {
-    @CsvBindAndJoinByPosition(position = 0)
+    @CsvBindByPosition(position = 0)
     private int Team1_id;
-    @CsvBindAndJoinByPosition(position = 1)
+    @CsvBindByPosition(position = 1)
     private String Team1_name;
-    @CsvBindAndJoinByPosition(position = 2)
+    @CsvBindByPosition(position = 2)
     private String Team1_description;
-    @CsvBindAndJoinByPosition(position = 3)
+    @CsvBindByPosition(position = 3)
     private int Team1_Points;
-    @CsvBindAndJoinByPosition(position = 4)
+    @CsvBindByPosition(position = 4)
     private int Team2_Points;
-    @CsvBindAndJoinByPosition(position = 5)
+    @CsvBindByPosition(position = 5)
     private int Team2_id;
-    @CsvBindAndJoinByPosition(position = 6)
+    @CsvBindByPosition(position = 6)
     private String Team2_name;
-    @CsvBindAndJoinByPosition(position = 7)
+    @CsvBindByPosition(position = 7)
     private String Team2_description;
 
     public int getTeam1_id(){
