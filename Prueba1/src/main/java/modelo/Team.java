@@ -13,9 +13,6 @@ public class Team {
         this.id = id;
         this.points = points;
     }
-    public Team(){
-
-    }
 
 
 }

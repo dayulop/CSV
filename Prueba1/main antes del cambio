@@ -1,19 +1,14 @@
-package org.example;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+/*package org.example;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.exceptions.CsvValidationException;
 import modelo.DatoEquipo;
 import modelo.Partido;
 import modelo.no_utilizado.Equipo;
 import modelo.Pronostico;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 //11:24 ver clase
-public class Main {
-
+public class Mai {
     public static void main(String[] arg) throws Exception {
         String File = "C:\\Users\\ariel\\Documents\\GitHub\\CSV\\Prueba1\\src\\main\\resources\\primeros_dos_partidos.csv";
 
@@ -73,7 +68,7 @@ public class Main {
         polonia.getData();
         mexico.getData(); */
 
-        Partido partido1 = new Partido(
+        /*Partido partido1 = new Partido(
                 1,
                 argentina.id,
                 arabiaS.id,
@@ -102,4 +97,4 @@ public class Main {
 
         mariana.getData();
     }
-}
+//}
