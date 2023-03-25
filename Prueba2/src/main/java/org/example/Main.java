@@ -1,6 +1,8 @@
 package org.example;
 import com.opencsv.CSVReader;
+import modelo.Equipo;
 import modelo.Partido;
+import modelo.Pronostico;
 
 import java.io.FileReader;
 
@@ -23,10 +25,9 @@ public class Main {
         String[]  columna7 = new String[10];   //descripcion equipo 1
         String[]  columna8 = new String[10];   //descripcion equipo 2
 
-        //TODO: se supone que entra toda la primer linea del archivo que mande. con split la va devolviendo por partes
         try{
             nextLine = reader.readNext();
-            String [] caracteres = new String[]{nextLine[0]};//tendria que ir aumentando el argumento de nexLine pero tengo una sola linea
+            String [] caracteres = new String[]{nextLine[0]};//TODO tendria que ir aumentando el argumento de nexLine(solo lee la primer fila)
 
             for(int i=0; i< caracteres.length;i++){//este for recorre las filas del texto
 
@@ -51,13 +52,14 @@ public class Main {
                         "descripcion equipo 2 " + columna8[i]);//TODO esto de mostrar solo es para probar. borrar luego
             }
 
-
-
-
         }catch (Exception e){
             System.out.println("algo fallo arriba  " + e);
         }
-
+        Equipo equipo1  = new Equipo(columna1[1],columna2[1],columna7[1]);
+        Equipo equipo2  = new Equipo(columna6[1],columna5[1],columna8[1]);
+        Partido partido1= new Partido(1,equipo1,equipo2,columna3[1],columna4[1]);
+        Pronostico pronostico1= new Pronostico(1,"mariana",partido1, partido1.id(), "ganador",1);
+        pronostico1.puntos();
 
     }
 }
