@@ -1,4 +1,4 @@
-package modelo;
+package noUtilizado;
 
 import com.opencsv.bean.AbstractCsvConverter;
 import com.opencsv.bean.CsvBindByPosition;

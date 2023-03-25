@@ -1,4 +1,4 @@
-package modelo;
+package noUtilizado;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -7,7 +7,7 @@ import java.io.FileReader;
 
 public class mostrar_archivo {
     public static void printnlFile(String file) throws Exception{
-        CSVReader reader = new CSVReaderBuilder(new FileReader("primer_partido.csv")).build();
+        CSVReader reader = new CSVReaderBuilder(new FileReader(file)).build();
         String[] nextLine;
         while (null != (nextLine = reader.readNext())) {
             System.out.println(nextLine[0]);

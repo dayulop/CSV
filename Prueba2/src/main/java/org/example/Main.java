@@ -1,27 +1,23 @@
 package org.example;
-import com.opencsv.*;
 import com.opencsv.CSVReader;
-import java.io.*;
+
 import java.io.FileReader;
 
-import com.opencsv.bean.AbstractCsvConverter;
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.exceptions.CsvConstraintViolationException;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import modelo.DatoResultados;
-import modelo.mostrar_archivo;
-
-import java.nio.file.*;
-import java.util.*;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.*;
 public class Main {
+    //mvn package
+    //java -jar target/Prueba2-1.0-SNAPSHOT.jar src/main/resources/pronostico.csv
+
     public static void main(String[] args) throws Exception {
-        CSVReader reader = new CSVReader(new FileReader(args[0]));
-        String[] nextLine= new String[1];//les puse de argumento un 1 pero creo que esta mal
-        String[] temporal = new String[1];
-        Integer[] columna1= new Integer[1];//guarda el id del equipo 1 de cada fila(cada fila equivale a un partido)
-        String[] columna2 = new String[1];//guarda el nombre del equipo 1 de cada fila
+
+        CSVReader reader   = new CSVReader(new FileReader(args[0]));
+        String[]  nextLine = new String[10];
+        String[]  temporal = new String[10];
+        Integer[] columna1 = new Integer[10];  //guarda el id del equipo 1 de cada fila(cada fila equivale a un partido)
+        String[]  columna2 = new String[10];   //guarda el nombre del equipo 1 de cada fila
+        Integer[] columna3 = new Integer[10];  //goles equipo 1
+        Integer[] columna4 = new Integer[10]; //goles equipo 2
+        String[]  columna5 = new String[10];   //nombre equipo 2
+        Integer[] columna6 = new Integer[10];  //id equipo 2
 
         //TODO: se supone que entra toda la primer linea del archivo que mande. con split la va devolviendo por partes
         try{
@@ -32,17 +28,23 @@ public class Main {
 
                 temporal= caracteres[i].split(";");//guarda lo que hay en la fila separado por ";". asi se genera las columnas
 
-                for(int j=0;j< temporal.length;j++){//este for recorre las columnas del texto
-                    columna1[i]= Integer.parseInt(temporal[0]);
-                    columna2[i]= temporal[1];
+                columna1[i]= Integer.parseInt(temporal[0]);
+                columna2[i]= temporal[1];
+                columna3[i]= Integer.parseInt(temporal[2]);
+                columna4[i]= Integer.parseInt(temporal[3]);
+                columna5[i]= temporal[4];
+                columna6[i]= Integer.parseInt(temporal[5]);
 
-
-                }
-                System.out.println("id "+ columna1[i] + " nombre del equipo 1 " + columna2[i]);//esto solo es para probar que se guarde bien
+                System.out.println("id "+ columna1[i] + " nombre del equipo 1 " + columna2[i] +"\n" +
+                        "goles equipo 1 " + columna3[i] + "\n" +
+                        "goles equipo 2 " + columna4[i] + "\n" +
+                        "nombre equipo 2 " + columna5[i] + "\n" +
+                        "id " + columna6[i] );//TODO esto solo es para probar. borrar luego
             }
         }catch (Exception e){
             System.out.println("algo fallo arriba  " + e);
         }
+        
 
     }
 }
