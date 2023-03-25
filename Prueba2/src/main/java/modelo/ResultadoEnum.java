@@ -5,6 +5,4 @@ public enum ResultadoEnum {
     EMPATE,
     PERDEDOR;
 
-    private ResultadoEnum() {
-    }
 }

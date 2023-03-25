@@ -2,6 +2,7 @@ modelo\ResultadoEnum.class
 modelo\Ronda.class
 noUtilizado\mostrar_archivo.class
 org\example\Main.class
+modelo\Equipo.class
 modelo\Pronostico.class
 modelo\Partido.class
 noUtilizado\DatoResultados.class

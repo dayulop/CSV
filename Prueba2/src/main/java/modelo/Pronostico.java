@@ -22,7 +22,7 @@ public class Pronostico {
             puntos = 1;
         }
 
-        System.out.println("estos son los puntos que gana mariana: " + puntos);
+        System.out.println("estos son los puntos que gana " +  nombre + ": "+ puntos);
         return puntos;
     }
 
