@@ -5,6 +5,7 @@ import modelo.Partido;
 import modelo.Pronostico;
 
 import java.io.FileReader;
+import java.nio.file.Path;
 
 public class Main {
     //mvn package
@@ -12,26 +13,30 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        String  File = "C:\\Users\\ariel\\Documents\\GitHub\\CSV\\Prueba2\\src\\main\\resources\\pronostico.csv";
         CSVReader reader   = new CSVReader(new FileReader(args[0]));
+
         String[]  nextLine = new String[10];
         String[]  temporal = new String[10];
 
         Integer[] columna1 = new Integer[10];  //guarda el id del equipo 1 de cada fila(cada fila equivale a un partido)
         String[]  columna2 = new String[10];   //guarda el nombre del equipo 1 de cada fila
-        Integer[] columna3 = new Integer[10];  //goles equipo 1
+        Integer[] columna3 = new Integer[10];//goles equipo 1
+
         Integer[] columna4 = new Integer[10];  //goles equipo 2
         String[]  columna5 = new String[10];   //nombre equipo 2
         Integer[] columna6 = new Integer[10];  //id equipo 2
+        
         String[]  columna7 = new String[10];   //descripcion equipo 1
         String[]  columna8 = new String[10];   //descripcion equipo 2
 
         try{
             nextLine = reader.readNext();
-            String [] caracteres = new String[]{nextLine[0]};//TODO tendria que ir aumentando el argumento de nexLine(solo lee la primer fila)
+            String [] fila = new String[]{nextLine[0]};//TODO tendria que ir aumentando el argumento de nexLine(solo lee la primer fila)
 
-            for(int i=0; i< caracteres.length;i++){//este for recorre las filas del texto
+            for(int i=0; i< fila.length;i++){//este for recorre las filas del texto
 
-                temporal= caracteres[i].split(";");//guarda lo que hay en la fila separado por ";". asi se genera las columnas
+                temporal= fila[i].split(";");//guarda lo que hay en la fila separado por ";". asi se genera las columnas
 
                 columna1[i]= Integer.parseInt(temporal[0]);
                 columna2[i]= temporal[1];
@@ -41,15 +46,6 @@ public class Main {
                 columna6[i]= Integer.parseInt(temporal[5]);
                 columna7[i]= temporal[6];
                 columna8[i]= temporal[7];
-
-                /*System.out.println("id "+ columna1[i] + "\n"+
-                        "nombre equipo 1 " + columna2[i] +"\n" +
-                        "goles equipo 1 " + columna3[i] + "\n" +
-                        "goles equipo 2 " + columna4[i] + "\n" +
-                        "nombre equipo 2 " + columna5[i] + "\n" +
-                        "id " + columna6[i] + "\n" +
-                        "descripcion equipo 1 " + columna7[i] + "\n" +
-                        "descripcion equipo 2 " + columna8[i]);TODO esto de mostrar solo es para probar. borrar luego*/
             }
 
         }catch (Exception e){
