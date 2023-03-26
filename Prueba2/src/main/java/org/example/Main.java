@@ -8,7 +8,7 @@ import java.io.FileReader;
 
 public class Main {
     //mvn package
-    //java -jar target/Prueba2-1.0-SNAPSHOT.jar src/main/resources/pronostico.csv
+    //java -jar target/Prueba2-1.0-SNAPSHOT.jar src/main/resources/Resultados.csv
 
     public static void main(String[] args) throws Exception {
 
@@ -42,26 +42,25 @@ public class Main {
                 columna7[i]= temporal[6];
                 columna8[i]= temporal[7];
 
-                System.out.println("id "+ columna1[i] + "\n"+
+                /*System.out.println("id "+ columna1[i] + "\n"+
                         "nombre equipo 1 " + columna2[i] +"\n" +
                         "goles equipo 1 " + columna3[i] + "\n" +
                         "goles equipo 2 " + columna4[i] + "\n" +
                         "nombre equipo 2 " + columna5[i] + "\n" +
                         "id " + columna6[i] + "\n" +
                         "descripcion equipo 1 " + columna7[i] + "\n" +
-                        "descripcion equipo 2 " + columna8[i]);//TODO esto de mostrar solo es para probar. borrar luego
+                        "descripcion equipo 2 " + columna8[i]);TODO esto de mostrar solo es para probar. borrar luego*/
             }
 
         }catch (Exception e){
             System.out.println("algo fallo arriba  " + e);
         }
-        Equipo equipo1  = new Equipo(columna1[1],columna2[1],columna7[1]);
-        Equipo equipo2  = new Equipo(columna6[1],columna5[1],columna8[1]);
+        Equipo equipo1  = new Equipo(columna1[0],columna2[0],columna7[0]);
+        Equipo equipo2  = new Equipo(columna6[0],columna5[0],columna8[0]);
 
-        Partido partido1= new Partido(1,equipo1,equipo2,columna3[1],columna4[1]);
-        System.out.println(partido1.getGoles_equipo1());
-        //Pronostico pronostico1= new Pronostico(1,"mariana",partido1, equipo1.id(), "ganador",1);
-        //pronostico1.puntos();
+        Partido partido1= new Partido(1,equipo1,equipo2,columna3[0],columna4[0]);
+        Pronostico pronostico1= new Pronostico(1,"mariana",partido1, equipo1.id(), "ganador",1);
+        pronostico1.getData();
 
     }
 }

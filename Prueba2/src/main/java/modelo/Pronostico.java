@@ -31,7 +31,7 @@ public class Pronostico {
         String info = "Pronostico: " + var10000 + "\n" +
                 "De: " + this.nombre + "\n" +
                 "Equipo: " + this.equipo + "\n" +
-                "Partido: " + String.valueOf(this.partido) + "\n" +
+                "Partido: " + (this.partido.id()) + "\n" +
                 "Resultado: " + this.resultado + "\n" +
                 "Puntos_Obtenidos: " + this.puntos() + "\n" +
                 "-------------------------------";
