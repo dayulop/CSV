@@ -57,9 +57,11 @@ public class Main {
         }
         Equipo equipo1  = new Equipo(columna1[1],columna2[1],columna7[1]);
         Equipo equipo2  = new Equipo(columna6[1],columna5[1],columna8[1]);
+
         Partido partido1= new Partido(1,equipo1,equipo2,columna3[1],columna4[1]);
-        Pronostico pronostico1= new Pronostico(1,"mariana",partido1, partido1.id(), "ganador",1);
-        pronostico1.puntos();
+        System.out.println(partido1.getGoles_equipo1());
+        //Pronostico pronostico1= new Pronostico(1,"mariana",partido1, equipo1.id(), "ganador",1);
+        //pronostico1.puntos();
 
     }
 }
