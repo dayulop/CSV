@@ -10,6 +10,7 @@ public class DatabaseConnector {
     static final int CUARTA_POSICION = 3;
     static final int QUINTA_POSICION = 4;
     static final int SEXTA_POSICION = 5;
+    static final int SEPTIMA_POSICION = 6;
     static final int GANA_EQUIPO1 = 1;
     static final int GANA_EQUIPO2 = 2;
     static final int EMPATE = 0;
@@ -48,7 +49,8 @@ public class DatabaseConnector {
             ResultSet rs   = stmt.executeQuery("SELECT * FROM partidos");
 
             while(rs.next()){
-                pronosticoPartido = determinarPronosticoRealizado(//Todo cambiar tipo de argumento a recibir );
+                String[] caracteristicasPronostico= new String[] {rs.getString(QUINTA_POSICION), rs.getString(SEXTA_POSICION), rs.getString(SEPTIMA_POSICION) };
+                pronosticoPartido = determinarPronosticoRealizado(caracteristicasPronostico);
                 pronosticoLeido   = new Pronostico(rs.getInt(SEGUNDA_POSICION),rs.getInt(TERCERA_POSICION),pronosticoPartido);
                 competencia.agregarPronostico(pronosticoLeido);
             }
@@ -57,7 +59,7 @@ public class DatabaseConnector {
             System.out.println(e);
         }
     }
-    private int determinarPronosticoRealizado(String[] caracteristicasPronostico){//todo cambiar la cadena de caracteres
+    private int determinarPronosticoRealizado( String[] caracteristicasPronostico){
         int pronosticoRealizado;
 
         if(caracteristicasPronostico[QUINTA_POSICION].equals(INDICADOR)) {
