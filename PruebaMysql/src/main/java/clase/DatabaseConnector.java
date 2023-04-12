@@ -1,7 +1,10 @@
 package clase;
-import java.sql.*;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DatabaseConnector {
     static final int PRIMERA_POSICION = 0;
@@ -15,11 +18,20 @@ public class DatabaseConnector {
     static final int GANA_EQUIPO2 = 2;
     static final int EMPATE = 0;
     static final String INDICADOR = "X";
-
+    static final String contraseña= "10s09s2000";
+    public void llenarBaseDeDatos() throws  IOException{
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticador", "root", contraseña);
+            Statement stmt = con.createStatement();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    //post: lee desde la base de dato la tabla de partidos y carga lo leido en la competencia.
     public void cargarPartidos(Competencia competencia) throws IOException {
         Partido partidoLeido;
         try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticador", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticador", "root", contraseña);
             Statement stmt = con.createStatement();
 
             ResultSet rs= stmt.executeQuery("SELECT * FROM partidos");
@@ -28,46 +40,52 @@ public class DatabaseConnector {
                 partidoLeido= new Partido(rs.getInt(PRIMERA_POSICION),
                         rs.getInt(SEGUNDA_POSICION),
                         rs.getString(TERCERA_POSICION),
+                        rs.getString(SEXTA_POSICION),
                         rs.getInt(CUARTA_POSICION),
-                        rs.getInt(QUINTA_POSICION),
-                        rs.getString(SEXTA_POSICION));
+                        rs.getInt(QUINTA_POSICION));
 
-                competencia.agregarPartido(partidoLeido);
+                competencia.agregar_partido(partidoLeido);
             }
-            com.close();
-        } cath(Exception e){
+            con.close();
+        }catch(Exception e){
             System.out.println(e);
         }
     }
 
-    public void cargarPronosticos(Competencia competencia){
+    //post: lee desde la base de dato la tabla de pronosticos y carga lo leido en la competencia.
+    public void cargarPronosticos(Competencia competencia) {
         Pronostico pronosticoLeido;
         int pronosticoPartido;
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticador", "root", "");
-            Statement stmt = con.createStatement();
-            ResultSet rs   = stmt.executeQuery("SELECT * FROM partidos");
 
-            while(rs.next()){
-                String[] caracteristicasPronostico= new String[] {rs.getString(QUINTA_POSICION), rs.getString(SEXTA_POSICION), rs.getString(SEPTIMA_POSICION) };
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pronosticador", "root", contraseña);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM partidos");
+
+            while (rs.next()) {
+                String[] caracteristicasPronostico = new String[]{rs.getString(QUINTA_POSICION),rs.getString(SEPTIMA_POSICION)};
+
                 pronosticoPartido = determinarPronosticoRealizado(caracteristicasPronostico);
-                pronosticoLeido   = new Pronostico(rs.getInt(SEGUNDA_POSICION),rs.getInt(TERCERA_POSICION),pronosticoPartido);
-                competencia.agregarPronostico(pronosticoLeido);
+                pronosticoLeido = new Pronostico(rs.getInt(SEGUNDA_POSICION), rs.getInt(TERCERA_POSICION), pronosticoPartido);
+
+                competencia.agregar_pronostico(pronosticoLeido, rs.getString(PRIMERA_POSICION));
             }
-            com.close();
-        } cath(Exception e){
+            con.close();
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    private int determinarPronosticoRealizado( String[] caracteristicasPronostico){
+
+    //post: determina el pronostico realizado. Devuelve 1 si gana el equipo 1, 2 si gana el equipo 2 y 0 si es empatan.
+    private int determinarPronosticoRealizado(String[] caracteristicasPronostico){
         int pronosticoRealizado;
 
-        if(caracteristicasPronostico[QUINTA_POSICION].equals(INDICADOR)) {
+        if(caracteristicasPronostico[PRIMERA_POSICION].equals(INDICADOR)) {
             pronosticoRealizado = GANA_EQUIPO1;
-        } else if(caracteristicasPronostico[SEXTA_POSICION].equals(INDICADOR)){
-            pronosticoRealizado = EMPATE;
-        } else {
+        } else if(caracteristicasPronostico[SEGUNDA_POSICION].equals(INDICADOR)){
             pronosticoRealizado = GANA_EQUIPO2;
+        } else {
+            pronosticoRealizado = EMPATE;
         }
         return pronosticoRealizado;
     }
